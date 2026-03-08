@@ -42,43 +42,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include 'includes/header.php';
 ?>
 
-<div class="card shadow p-4">
-    <h4 class="mb-3">Edit Student</h4>
+<div class="page-header">
+    <h1>
+        Edit Student
+        <small>Update details for <strong><?= htmlspecialchars($student['name']) ?></strong></small>
+    </h1>
+    <a href="index.php" class="btn-sms-secondary">
+        <i class="bi bi-arrow-left"></i> Back to List
+    </a>
+</div>
 
-    <?php if (isset($error)): ?>
-        <div class="alert alert-danger">
-            <?= $error ?>
+<div class="form-page-wrap">
+    <div class="sms-card">
+        <div class="card-head">
+            <i class="bi bi-pencil-square"></i>
+            <h5>Edit Student &mdash; ID #<?= $id ?></h5>
         </div>
-    <?php endif; ?>
+        <div class="card-body-pad">
 
-    <form method="POST">
-        <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-control"
-                value="<?= htmlspecialchars($student['name']) ?>" required>
+            <?php if (isset($error)): ?>
+            <div class="sms-alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <?= $error ?>
+            </div>
+            <?php endif; ?>
+
+            <form method="POST">
+                <div class="form-field">
+                    <label class="sms-form-label">Full Name <span style="color:var(--danger)">*</span></label>
+                    <input type="text" name="name" class="sms-input"
+                        value="<?= htmlspecialchars($student['name']) ?>" required>
+                </div>
+
+                <div class="form-field">
+                    <label class="sms-form-label">Email Address <span style="color:var(--danger)">*</span></label>
+                    <input type="email" name="email" class="sms-input"
+                        value="<?= htmlspecialchars($student['email']) ?>" required>
+                </div>
+
+                <div class="form-field">
+                    <label class="sms-form-label">Phone Number</label>
+                    <input type="text" name="phone" class="sms-input"
+                        value="<?= htmlspecialchars($student['phone']) ?>">
+                </div>
+
+                <div class="form-field">
+                    <label class="sms-form-label">Course / Program</label>
+                    <input type="text" name="course" class="sms-input"
+                        value="<?= htmlspecialchars($student['course']) ?>">
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="btn-sms-success">
+                        <i class="bi bi-check-lg"></i> Update Student
+                    </button>
+                    <a href="index.php" class="btn-sms-secondary">
+                        <i class="bi bi-x"></i> Cancel
+                    </a>
+                </div>
+            </form>
+
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control"
-                value="<?= htmlspecialchars($student['email']) ?>" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Phone</label>
-            <input type="text" name="phone" class="form-control"
-                value="<?= htmlspecialchars($student['phone']) ?>">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Course</label>
-            <input type="text" name="course" class="form-control"
-                value="<?= htmlspecialchars($student['course']) ?>">
-        </div>
-
-        <button type="submit" class="btn btn-success">Update</button>
-        <a href="index.php" class="btn btn-secondary">Cancel</a>
-    </form>
+    </div>
 </div>
 
 <?php include 'includes/footer.php'; ?>
